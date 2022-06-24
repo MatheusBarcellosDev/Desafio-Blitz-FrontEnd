@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 import { AuthProvider, AuthContext } from "./context/auth";
+import { Signup } from "./pages/Signup";
 
 export function AppRoutes() {
   const Private = ({ children }) => {
@@ -32,6 +33,7 @@ export function AppRoutes() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route
             path="/tasks"
             element={

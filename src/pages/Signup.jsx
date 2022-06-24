@@ -4,16 +4,17 @@ import { Briefcase } from "phosphor-react";
 import { AuthContext } from "../context/auth";
 import { Link } from "react-router-dom";
 
-export function Login() {
-  const { loading, signIn } = useContext(AuthContext);
+export function Signup() {
+  const { loading, signUp } = useContext(AuthContext);
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    signIn(email, password);
+    signUp(name, email, password);
   };
 
   return (
@@ -33,6 +34,13 @@ export function Login() {
         >
           <input
             className="bg-gray-900 rounded px-5 h-12"
+            placeholder="Digite seu nome"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            className="bg-gray-900 rounded px-5 h-12"
             placeholder="Digite seu e-mail"
             type="email"
             value={email}
@@ -49,11 +57,11 @@ export function Login() {
             className="bg-green-500 rounded px-5 h-12 mt-5 mb-5 text-white uppercase font-bold hover:bg-green-700 transition-colors"
             type="submit"
           >
-            {loading ? "Carregando..." : "Entrar"}
+            {loading ? "Carregando..." : "Cadastrar"}
           </button>
-          <Link to="/signup">
+          <Link to="/">
             <span className="border-t border-gray-300 py-3 block text-center">
-              Não tem uma conta? <strong>Cadastre-se</strong>
+              Já tem uma conta? <strong>Faça o login</strong>
             </span>
           </Link>
         </form>
