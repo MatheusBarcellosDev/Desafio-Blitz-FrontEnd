@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
+import { Briefcase } from "phosphor-react";
 
 import { AuthContext } from "../context/auth";
+import { Link } from "react-router-dom";
 
 export function Login() {
   const { loading, signIn } = useContext(AuthContext);
@@ -15,23 +17,47 @@ export function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="rounded border border-gray-100 min-h-screen flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center max-w-lg w-full bg-gray-700 border border-gray-500">
+        <div className=" flex flex-1 w-full flex-col items-center mt-10">
+          <div className="py-2 px-6 rounded flex gap-5 items-center">
+            <strong className="text-red-500 text-8xl italic uppercase mt-2">
+              Blitz
+            </strong>
+            <Briefcase size={82} color={"#e71224"} />
+          </div>
+        </div>
+        <form
+          className="flex flex-col p-10 gap-5 w-full"
+          onSubmit={handleSubmit}
+        >
+          <input
+            className="bg-gray-900 rounded px-5 h-12"
+            placeholder="Digite seu e-mail"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className="bg-gray-900  rounded px-5 h-12"
+            placeholder="Digite sua senha"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            className="bg-green-500 rounded px-5 h-12 mt-5 mb-5 text-white uppercase font-bold hover:bg-green-700 transition-colors"
+            type="submit"
+          >
+            {loading ? "Carregando..." : "Entrar"}
+          </button>
+          <Link to="/signup">
+            <a className="border-t border-gray-300 py-3 block text-center">
+              Não tem uma conta? <strong>Cadastre-se</strong>
+            </a>
+          </Link>
+        </form>
+      </div>
     </div>
   );
 }
