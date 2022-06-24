@@ -25,19 +25,31 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (email, password) => {
     try {
-      const user = await api
-        .post("/session", { email, password })
-        .then((res) => {
-          console.log(res);
-          const { id, name, email, token } = res.data;
+      await api.post("/session", { email, password }).then((res) => {
+        console.log(res);
+        const { id, name, email, token } = res.data;
 
-          setUser({ id, name, email, token });
-          localStorage.setItem("user", JSON.stringify(res.data));
-          navigate("/tasks");
-          toast.success("Login realizado com sucesso!");
-        });
+        setUser({ id, name, email, token });
+        localStorage.setItem("user", JSON.stringify(res.data));
+        navigate("/tasks");
+        toast.success("Login realizado com sucesso!");
+      });
     } catch (err) {
       toast.error("Usuário ou senha inválidos");
+      console.log("cheguei ");
+      console.log(err.message);
+    }
+  };
+
+  const signUp = async (name, email, password) => {
+    try {
+      await api.post("/users", { name, email, password }).then((res) => {
+        console.log(res);
+        navigate("/");
+        toast.success("Usuário criado com sucesso!");
+      });
+    } catch (err) {
+      toast.error("Erro ao criar usuário");
       console.log("cheguei ");
       console.log(err.message);
     }
@@ -51,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ authenticated: !!user, user, signIn, loading, logout }}
+      value={{ authenticated: !!user, user, signIn, loading, logout, signUp }}
     >
       {children}
     </AuthContext.Provider>
