@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
 
         setUser({ id, name, email, token });
         localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("token", token);
         navigate("/tasks");
         toast.success("Login realizado com sucesso!");
       });
