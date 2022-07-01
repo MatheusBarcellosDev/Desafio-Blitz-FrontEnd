@@ -32,21 +32,33 @@ export function Signup() {
           className="flex flex-col p-10 gap-5 w-full"
           onSubmit={handleSubmit}
         >
+          <label className="text-gray-700 hidden" htmlFor="name">
+            Nome
+          </label>
           <input
+            id="name"
             className="bg-gray-900 rounded px-5 h-12"
             placeholder="Digite seu nome"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <label className="text-gray-700 hidden" htmlFor="email">
+            Email
+          </label>
           <input
+            id="email"
             className="bg-gray-900 rounded px-5 h-12"
             placeholder="Digite seu e-mail"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <label className="text-gray-700 hidden" htmlFor="senha">
+            Senha
+          </label>
           <input
+            id="senha"
             className="bg-gray-900  rounded px-5 h-12"
             placeholder="Digite sua senha"
             type="password"

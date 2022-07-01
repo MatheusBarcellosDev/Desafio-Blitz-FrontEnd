@@ -31,20 +31,29 @@ export function Login() {
           className="flex flex-col p-10 gap-5 w-full"
           onSubmit={handleSubmit}
         >
+          <label className="text-gray-700 hidden" htmlFor="email">
+            Email
+          </label>
           <input
-            className="bg-gray-900 rounded px-5 h-12"
+            id="email"
+            className="bg-gray-900 rounded px-5 h-12 w-full"
             placeholder="Digite seu e-mail"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <label className="text-gray-700 hidden" htmlFor="senha">
+            Senha
+          </label>
           <input
-            className="bg-gray-900  rounded px-5 h-12"
+            id="senha"
+            className="bg-gray-900  rounded px-5 h-12 w-full"
             placeholder="Digite sua senha"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <button
             className="bg-green-500 rounded px-5 h-12 mt-5 mb-5 text-white uppercase font-bold hover:bg-green-700 transition-colors"
             type="submit"
