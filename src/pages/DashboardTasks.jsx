@@ -59,6 +59,9 @@ export function DashboardTasks() {
         <section className="m-10">
           <form className="flex justify-center" onSubmit={handleNewTask}>
             <div className="flex w-1/3">
+              <label htmlFor="task" className="text-gray-600 hidden">
+                Nova Tarefa
+              </label>
               <input
                 type="text"
                 id="task"
