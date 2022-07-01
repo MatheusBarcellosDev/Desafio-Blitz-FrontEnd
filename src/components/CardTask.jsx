@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/auth";
 import md5 from "crypto-js/md5";
 
-export function CardTask({ task, id, update }) {
+export function CardTask({ task, setUpdate }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { user } = useContext(AuthContext);
@@ -13,7 +13,7 @@ export function CardTask({ task, id, update }) {
 
   const handleDelete = (task) => {
     Api.delete(`task/${task.id}`).then(() => {
-      update([...task.filter((t) => t.id !== task.id)]);
+      setUpdate((prev) => prev.filter((t) => t.id !== task.id));
     });
   };
 
@@ -28,7 +28,7 @@ export function CardTask({ task, id, update }) {
     };
     Api.put(`task/${task.id}`, newTask);
     setIsOpen(!isOpen);
-    update([...newTask]);
+    setUpdate((prev) => prev.map((t) => (t.id === task.id ? newTask : t)));
   };
 
   const uploadTaskInProgress = (task) => {
@@ -42,7 +42,7 @@ export function CardTask({ task, id, update }) {
     };
     Api.put(`/task/${task.id}`, newTask);
     setIsOpen(!isOpen);
-    update([...newTask]);
+    setUpdate((prev) => prev.map((t) => (t.id === task.id ? newTask : t)));
   };
 
   const uploadTaskReady = (task) => {
@@ -56,7 +56,7 @@ export function CardTask({ task, id, update }) {
     };
     Api.put(`/task/${task.id}`, newTask);
     setIsOpen(!isOpen);
-    update([...newTask]);
+    setUpdate((prev) => prev.map((t) => (t.id === task.id ? newTask : t)));
   };
 
   return (

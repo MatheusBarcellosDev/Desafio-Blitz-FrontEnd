@@ -34,17 +34,23 @@ export function DashboardTasks() {
       });
   };
 
-  useEffect(() => {
-    api
-      .get("task", {
+  const getTasks = async () => {
+    await api
+      .get("/task", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => {
-        setTasks(res.data.tasks);
+      .then((response) => {
+        setTasks(response.data.tasks);
       });
-  }, [tasks]);
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
+  console.log(tasks);
 
   return (
     <div className="flex flex-col min-h-screen p-8">
@@ -85,7 +91,7 @@ export function DashboardTasks() {
                       key={task._id}
                       task={task}
                       id={task.id}
-                      update={setTasks}
+                      setUpdate={setTasks}
                     />
                   ))
               ) : (
@@ -111,7 +117,7 @@ export function DashboardTasks() {
                       key={task._id}
                       task={task}
                       id={task.id}
-                      update={setTasks}
+                      setUpdate={setTasks}
                     />
                   ))
               ) : (
@@ -137,7 +143,7 @@ export function DashboardTasks() {
                       key={task._id}
                       task={task}
                       id={task.id}
-                      update={setTasks}
+                      setUpdate={setTasks}
                     />
                   ))
               ) : (
