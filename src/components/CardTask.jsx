@@ -17,7 +17,7 @@ export function CardTask({ task, setUpdate }) {
     });
   };
 
-  const uploadTaskPending = (task) => {
+  const updateTaskPending = (task) => {
     const newTask = {
       id: task.id,
       content: task.content,
@@ -31,7 +31,7 @@ export function CardTask({ task, setUpdate }) {
     setUpdate((prev) => prev.map((t) => (t.id === task.id ? newTask : t)));
   };
 
-  const uploadTaskInProgress = (task) => {
+  const updateTaskInProgress = (task) => {
     const newTask = {
       id: task.id,
       content: task.content,
@@ -45,7 +45,7 @@ export function CardTask({ task, setUpdate }) {
     setUpdate((prev) => prev.map((t) => (t.id === task.id ? newTask : t)));
   };
 
-  const uploadTaskReady = (task) => {
+  const updateTaskReady = (task) => {
     const newTask = {
       id: task.id,
       content: task.content,
@@ -87,21 +87,21 @@ export function CardTask({ task, setUpdate }) {
             }`}
           >
             <button
-              onClick={() => uploadTaskPending(task)}
+              onClick={() => updateTaskPending(task)}
               disabled={task.pending}
               className="px-4 text-sm text-center bg-yellow-900 text-yellow-300 rounded-xl hover:bg-yellow-800 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Pendente
             </button>
             <button
-              onClick={() => uploadTaskInProgress(task)}
+              onClick={() => updateTaskInProgress(task)}
               disabled={task.inProgress}
               className="px-4 text-sm text-center rounded-xl bg-blue-900 text-blue-300 hover:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Andamento
             </button>
             <button
-              onClick={() => uploadTaskReady(task)}
+              onClick={() => updateTaskReady(task)}
               disabled={task.ready}
               className="px-4 text-sm text-center rounded-xl bg-green-900 text-green-300 hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed"
             >

@@ -1,0 +1,19 @@
+{
+    "env": {
+        "es2021": true,
+        "node": true
+    },
+    "extends": "trybe-frontend",
+
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+    }
+}
