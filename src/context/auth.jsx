@@ -47,7 +47,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       await api.post("/users", { name, email, password }).then((res) => {
-        console.log(res);
         setLoading(false);
         navigate("/");
         toast.success("Usuário criado com sucesso!");
