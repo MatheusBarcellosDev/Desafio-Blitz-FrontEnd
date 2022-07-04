@@ -3,12 +3,13 @@ import api from "../services/api";
 import { Header } from "../components/Header";
 import { CardTask } from "../components/CardTask";
 import { AuthContext } from "../context/auth";
-import { CircleWavyCheck, Desktop, Warning } from "phosphor-react";
+import { CircleWavyCheck, Desktop, Warning, SpinnerGap } from "phosphor-react";
 import { toast } from "react-toastify";
 
 export function DashboardTasks() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { logout } = useContext(AuthContext);
 
@@ -18,7 +19,9 @@ export function DashboardTasks() {
 
   const handleNewTask = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (newTask.length === 0) {
+      setLoading(false);
       return toast.error("Você precisa digitar uma tarefa!");
     }
     api
@@ -31,6 +34,7 @@ export function DashboardTasks() {
       .then((response) => {
         setTasks([...tasks, response.data]);
         setNewTask("");
+        setLoading(false);
       });
   };
 
@@ -74,7 +78,11 @@ export function DashboardTasks() {
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-tr-lg rounded-br-lg"
               >
-                Add
+                {loading ? (
+                  <SpinnerGap size={24} className="m-auto animate-spin" />
+                ) : (
+                  "Add"
+                )}
               </button>
             </div>
           </form>
