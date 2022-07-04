@@ -24,34 +24,37 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signIn = async (email, password) => {
+    setLoading(true);
     try {
       await api.post("/session", { email, password }).then((res) => {
-        console.log(res);
         const { id, name, email, token } = res.data;
 
         setUser({ id, name, email, token });
         localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("token", token);
+        setLoading(false);
         navigate("/tasks");
         toast.success("Login realizado com sucesso!");
       });
     } catch (err) {
       toast.error("Usuário ou senha inválidos");
-      console.log("cheguei ");
+      setLoading(false);
       console.log(err.message);
     }
   };
 
   const signUp = async (name, email, password) => {
+    setLoading(true);
     try {
       await api.post("/users", { name, email, password }).then((res) => {
         console.log(res);
+        setLoading(false);
         navigate("/");
         toast.success("Usuário criado com sucesso!");
       });
     } catch (err) {
       toast.error("Erro ao criar usuário");
-      console.log("cheguei ");
+      setLoading(false);
       console.log(err.message);
     }
   };

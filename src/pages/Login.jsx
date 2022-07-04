@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Briefcase } from "phosphor-react";
+import { Briefcase, SpinnerGap } from "phosphor-react";
 
 import { AuthContext } from "../context/auth";
 import { Link } from "react-router-dom";
@@ -15,6 +15,8 @@ export function Login() {
 
     signIn(email, password);
   };
+
+  console.log(loading);
 
   return (
     <div className="rounded border border-gray-100 min-h-screen flex flex-col items-center justify-center">
@@ -58,7 +60,11 @@ export function Login() {
             className="bg-green-500 rounded px-5 h-12 mt-5 mb-5 text-white uppercase font-bold hover:bg-green-700 transition-colors"
             type="submit"
           >
-            {loading ? "Carregando..." : "Entrar"}
+            {loading ? (
+              <SpinnerGap size={32} className="m-auto animate-spin" />
+            ) : (
+              "Entrar"
+            )}
           </button>
           <Link to="/signup">
             <span className="border-t border-gray-300 py-3 block text-center">
