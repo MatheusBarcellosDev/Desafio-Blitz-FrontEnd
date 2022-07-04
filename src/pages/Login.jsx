@@ -16,8 +16,6 @@ export function Login() {
     signIn(email, password);
   };
 
-  console.log(loading);
-
   return (
     <div className="rounded border border-gray-100 min-h-screen flex flex-col items-center justify-center">
       <div className="flex flex-col items-center max-w-lg w-full bg-gray-700 border border-gray-500">
@@ -37,6 +35,7 @@ export function Login() {
             Email
           </label>
           <input
+            autoComplete="off"
             id="email"
             className="bg-gray-900 rounded px-5 h-12 w-full"
             placeholder="Digite seu e-mail"

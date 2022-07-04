@@ -24,14 +24,22 @@ export function DashboardTasks() {
       setLoading(false);
       return toast.error("Você precisa digitar uma tarefa!");
     }
+
+    const data = {
+      content: newTask,
+      pending: true,
+      inProgress: false,
+      ready: false,
+    };
+
     api
-      .post("/task", {
-        content: newTask,
-        pending: true,
-        inProgress: false,
-        ready: false,
+      .post("/task", data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       })
       .then((response) => {
+        console.log(response);
         setTasks([...tasks, response.data]);
         setNewTask("");
         setLoading(false);
@@ -54,8 +62,6 @@ export function DashboardTasks() {
     getTasks();
   }, []);
 
-  console.log(tasks);
-
   return (
     <div className="flex flex-col min-h-screen p-8">
       <Header />
@@ -67,6 +73,7 @@ export function DashboardTasks() {
                 Nova Tarefa
               </label>
               <input
+                autoComplete="off"
                 type="text"
                 id="task"
                 className="bg-gray-500 p-4 rounded-tl-lg rounded-bl-lg w-full h-12 focus:outline-none"
